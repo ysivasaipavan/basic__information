@@ -1,0 +1,146 @@
+openapi: '3.0.2'
+info:
+  title: contact_information
+  version: '2.0'
+servers:
+  - url: http://localhost:8080
+
+
+paths:
+  /create_contact:
+    post:
+      tags:
+        - contacts
+      description: Create_contact
+      operationId: Create_contact
+      responses:
+        '201':
+          description: Create_contact Sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Create_contact Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      requestBody:
+        description: Create_contact
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BODYDATA'
+  /get_Question:
+    get:
+      tags:
+        - contacts
+      description:  Get_contact 
+      operationId: GeT_contact
+      responses:
+        '201':
+          description: Get_contact_Sucessfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BODYDATA'
+        '400':
+          description: Get_contact_Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /Update_Question/{contact_id}:
+    put:
+      tags:
+        - contacts
+      description:  Update_contact 
+      operationId: Update_contact
+      parameters:
+        - name: contact_id
+          in: path
+          description: id 
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Update_contact_Sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Update_contact_Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      requestBody:
+        description: Update_contact
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BODYDATA'
+  /delete_Question/{contact_id}:
+    delete:
+      tags:
+        - contacts
+      description:  delete_contact 
+      operationId: delete_contact
+      parameters:
+        - name: contact_id
+          in: path
+          description: contact 
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description:  Delete_contact_SucessFully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Delete_contact_Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+            
+
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      description:  ResponseInStatusCode
+      properties:
+        code: 
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string    
+          
+    BODYDATA:
+      type: object
+      properties:
+        contact_number: 
+          type: number
+        alternate_number:
+          type: number
+        email: 
+          type: string
+        mailing_address:
+          type: string
+        city:
+          type: string
+        zip_code: 
+          type: string
+        state:
+          type: string
